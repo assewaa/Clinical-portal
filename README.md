@@ -161,3 +161,20 @@ Application URLs are configured in:
     portal/projects.py
 
 The portal can be extended with additional applications without redesigning the welcome page.
+
+## Production Deployment
+
+Production deployment instructions and reusable configuration templates
+are maintained in the deploy/ directory.
+
+Deployment guide: deploy/README.md
+and systemd setup, Nginx integration, updates, backups and rollback.
+
+Templates:
+
+- deploy/systemd/clinical-portal.service
+- deploy/nginx/portal-locations.conf
+
+Adjust account names, project paths, hostnames and application URLs for
+other servers. Never commit production environment files, secret keys,
+TLS private keys or certificates.
