@@ -1,0 +1,147 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="theme-color" content="#101b35">
+<title>Clinical Systems Portal</title>
+
+<style>
+*{box-sizing:border-box}
+:root{
+ --navy:#101b35;--muted:#64748b;--paper:#f4f7fc;
+ --blue:#2563eb;--pink:#db4d91;
+}
+body{
+ margin:0;background:var(--paper);color:#17233d;
+ font-family:Inter,system-ui,-apple-system,"Segoe UI",Arial,sans-serif;
+}
+header{
+ background:linear-gradient(115deg,#101b35,#1d3158);
+ color:white;padding:28px 6%;
+}
+.header-inner{
+ max-width:1250px;margin:auto;display:flex;align-items:center;gap:16px;
+}
+.logo{
+ width:48px;height:48px;border-radius:15px;background:#ffffff18;
+ display:grid;place-items:center;font-size:27px;
+}
+header h1{font-size:21px;margin:0;font-weight:750}
+header p{margin:5px 0 0;color:#c4d0e5;font-size:13px}
+main{max-width:1250px;margin:58px auto;padding:0 24px}
+.intro{text-align:center;margin-bottom:36px}
+.eyebrow{
+ color:#536c9a;text-transform:uppercase;letter-spacing:2px;
+ font-size:11px;font-weight:800
+}
+.intro h2{font-size:clamp(30px,4vw,43px);margin:12px 0 10px}
+.intro p{color:var(--muted);line-height:1.7;margin:0}
+.projects{
+ display:grid;grid-template-columns:repeat(auto-fit,minmax(300px,1fr));
+ gap:25px;align-items:stretch
+}
+.card{
+ background:white;border:1px solid #e4eaf3;border-radius:23px;
+ overflow:hidden;box-shadow:0 12px 35px #1d31580c;
+ display:flex;flex-direction:column;transition:transform .2s,box-shadow .2s
+}
+.card:hover{transform:translateY(-5px);box-shadow:0 18px 42px #1d31581b}
+.art{
+ height:265px;display:flex;align-items:center;justify-content:center;
+ overflow:hidden;position:relative
+}
+.art.neurology{background:linear-gradient(135deg,#102d62,#1763a0)}
+.art.breast{background:linear-gradient(135deg,#642b62,#c34d91)}
+.art img{width:100%;height:100%;object-fit:cover;display:block}
+.card-content{padding:25px;display:flex;flex:1;flex-direction:column}
+.tag{
+ display:inline-block;align-self:flex-start;padding:6px 10px;
+ border-radius:30px;background:#edf3ff;color:#2855a1;
+ font-size:10px;font-weight:800;letter-spacing:.8px;text-transform:uppercase
+}
+.breast .tag{background:#fff0f7;color:#b33177}
+.card h3{font-size:22px;margin:15px 0 9px}
+.card p{font-size:14px;color:var(--muted);line-height:1.7;margin:0 0 22px}
+.button{
+ margin-top:auto;display:flex;justify-content:center;align-items:center;
+ padding:14px 18px;border-radius:12px;text-decoration:none;color:white;
+ font-size:13px;font-weight:750;transition:filter .2s
+}
+.button:hover{filter:brightness(1.1)}
+.neurology .button{background:#2459bd}
+.breast .button{background:#c13f83}
+.art.radiology {
+    background: linear-gradient(135deg, #24104f, #7040a0, #2378bd);
+}
+
+.radiology .tag {
+    background: #f1e9ff;
+    color: #60318c;
+}
+
+.radiology .button {
+    background: linear-gradient(135deg, #542181, #7040a0);
+}
+.footer{
+ text-align:center;color:#8b98ad;font-size:12px;
+ padding:35px 20px 28px
+}
+.footer span{display:block;margin-top:6px;color:#aab4c4}
+@media(max-width:600px){
+ header{padding:22px}
+ main{margin:38px auto;padding:0 16px}
+ .art{height:225px}
+ .card-content{padding:21px}
+}
+</style>
+</head>
+
+<body>
+<header>
+ <div class="header-inner">
+  <div class="logo" aria-hidden="true">✚</div>
+  <div>
+   <h1>Clinical Systems Portal</h1>
+   <p>Integrated access to independent clinical applications</p>
+  </div>
+ </div>
+</header>
+
+<main>
+ <section class="intro">
+  <div class="eyebrow">Clinical information systems</div>
+  <h2>Welcome</h2>
+  <p>Select a clinical system to continue.<br>
+     Each application has its own secure login and clinical database.</p>
+ </section>
+
+ <section class="projects" aria-label="Available clinical systems">
+  {% for project in projects %}
+   {% if project.status == "active" %}
+    <article class="card {{ project.theme }}">
+     <div class="art {{ project.theme }}">
+      <img src="{% static project.image %}"
+           alt="{{ project.short_name }} illustration">
+     </div>
+     <div class="card-content">
+      <span class="tag">Clinical application</span>
+      <h3>{{ project.name }}</h3>
+      <p>{{ project.description }}</p>
+      <a class="button" href="{{ project.url }}">
+       {{ project.button }} &nbsp; →
+      </a>
+     </div>
+    </article>
+   {% endif %}
+  {% endfor %}
+ </section>
+</main>
+
+<footer class="footer">
+ Clinical Systems Portal
+ <span>Secure access · Independent applications · Unified entry point</span>
+</footer>
+</body>
+</html>
