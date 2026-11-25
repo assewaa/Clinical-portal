@@ -1,6 +1,13 @@
+import os
+
 # Central registry for clinical applications.
 #
 # Add future applications here without redesigning the portal.
+
+NEUROLOGY_URL = os.getenv("NEUROLOGY_URL", "/neurology/accounts/login/")
+BREAST_REGISTRY_URL = os.getenv("BREAST_REGISTRY_URL", "/login/?next=/app/")
+RADIOLOGY_URL = os.getenv("RADIOLOGY_URL", "/radiology/")
+
 
 PORTAL_PROJECTS = [
     {
@@ -12,7 +19,7 @@ PORTAL_PROJECTS = [
             "clinical documentation and investigations."
         ),
         "image": "portal/images/neurology_brain_art.png",
-        "url": "/neurology/accounts/login/",
+        "url": NEUROLOGY_URL,
         "theme": "neurology",
         "status": "active",
         "button": "Enter Neurology ED",
@@ -26,7 +33,7 @@ PORTAL_PROJECTS = [
             "treatment follow-up, analytics and reports."
         ),
         "image": "portal/images/breast_registry_art.png",
-        "url": "/login/?next=/app/",
+        "url": BREAST_REGISTRY_URL,
         "theme": "breast",
         "status": "active",
         "button": "Enter Breast Cancer Registry",
@@ -37,7 +44,7 @@ PORTAL_PROJECTS = [
         "short_name": "Radiology",
         "description": "Clinical reports and imaging studies.",
         "image": "portal/images/radiology_art.png",
-        "url": "/radiology/",
+        "url": RADIOLOGY_URL,
         "theme": "radiology",
         "status": "active",
         "button": "Enter Radiology",
