@@ -95,8 +95,46 @@ Important settings include:
 - DJANGO_SECRET_KEY
 - DJANGO_DEBUG
 - DJANGO_ALLOWED_HOSTS
+- PORTAL_ENABLED_PROJECTS
+- NEUROLOGY_URL
+- BREAST_REGISTRY_URL
+- RADIOLOGY_URL
 
-Do not commit a real .env file.
+The portal reads these values from its process environment. For a systemd
+deployment, configure them in the service's EnvironmentFile.
+
+Do not commit production secrets or a real environment file.
+
+### Choosing which applications appear
+
+Set PORTAL_ENABLED_PROJECTS to a comma-separated list of application keys:
+
+    PORTAL_ENABLED_PROJECTS=neurology,radiology
+
+Available keys:
+
+- neurology
+- breast-registry
+- radiology
+
+If PORTAL_ENABLED_PROJECTS is omitted, all registered applications appear.
+
+### Configuring application addresses
+
+Each application URL can be configured independently.
+
+For applications served on the same HTTPS domain as the portal, use a
+relative path, for example:
+
+    NEUROLOGY_URL=/neurology/accounts/login/
+
+For applications hosted on another server, use its complete HTTPS address,
+for example:
+
+    NEUROLOGY_URL=https://neurology.example.com/login/
+
+The portal does not proxy application traffic or manage remote application
+authentication. The user's browser opens the configured destination directly.
 
 ## Architecture
 

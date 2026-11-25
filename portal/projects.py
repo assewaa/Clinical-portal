@@ -50,3 +50,20 @@ PORTAL_PROJECTS = [
         "button": "Enter Radiology",
     },
 ]
+
+# Comma-separated application keys enabled on this server.
+# Defaults to all registered applications.
+_enabled_projects = {
+    item.strip()
+    for item in os.getenv(
+        "PORTAL_ENABLED_PROJECTS",
+        "neurology,breast-registry,radiology",
+    ).split(",")
+    if item.strip()
+}
+
+PORTAL_PROJECTS = [
+    project
+    for project in PORTAL_PROJECTS
+    if project["key"] in _enabled_projects
+]
