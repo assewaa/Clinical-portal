@@ -6,6 +6,7 @@ import os
 
 NEUROLOGY_URL = os.getenv("NEUROLOGY_URL", "/neurology/accounts/login/")
 BREAST_REGISTRY_URL = os.getenv("BREAST_REGISTRY_URL", "/login/?next=/app/")
+CARDIOVASCULAR_URL = os.getenv("CARDIOVASCULAR_URL", "/cardiovascular/")
 RADIOLOGY_URL = os.getenv("RADIOLOGY_URL", "/radiology/")
 
 
@@ -23,6 +24,20 @@ PORTAL_PROJECTS = [
         "theme": "neurology",
         "status": "active",
         "button": "Enter Neurology ED",
+    },
+    {
+        "key": "cardiovascular",
+        "name": "Cardiovascular Disorders",
+        "short_name": "Cardiovascular",
+        "description": (
+            "Cardiovascular clinical assessment, patient records, "
+            "investigations, diagnoses and clinical reporting."
+        ),
+        "image": "portal/images/cardiovascular_heart.png",
+        "url": CARDIOVASCULAR_URL,
+        "theme": "cardiovascular",
+        "status": "active",
+        "button": "Enter Cardiovascular System",
     },
     {
         "key": "breast-registry",
@@ -57,7 +72,7 @@ _enabled_projects = {
     item.strip()
     for item in os.getenv(
         "PORTAL_ENABLED_PROJECTS",
-        "neurology,breast-registry,radiology",
+        "neurology,cardiovascular,breast-registry,radiology",
     ).split(",")
     if item.strip()
 }

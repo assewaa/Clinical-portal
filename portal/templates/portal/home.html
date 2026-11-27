@@ -14,12 +14,42 @@
  --blue:#2563eb;--pink:#db4d91;
 }
 body{
- margin:0;background:var(--paper);color:#17233d;
+ margin:0;
+ min-height:100vh;
+ background:#071426;
+ color:#17233d;
  font-family:Inter,system-ui,-apple-system,"Segoe UI",Arial,sans-serif;
+ isolation:isolate;
+ position:relative;
+}
+body::before{
+ content:"";
+ position:fixed;
+ inset:0;
+ z-index:-2;
+ background:
+  linear-gradient(180deg,rgba(5,15,32,.70),rgba(7,20,39,.57) 45%,rgba(5,15,32,.82)),
+  url("{% static 'portal/images/clinicalback.jpg' %}") center 42% / cover no-repeat;
+ transform:scale(1.015);
+}
+body::after{
+ content:"";
+ position:fixed;
+ inset:0;
+ z-index:-1;
+ pointer-events:none;
+ background:
+  radial-gradient(ellipse at 50% 35%,transparent 15%,rgba(3,12,27,.24) 100%),
+  linear-gradient(90deg,rgba(4,15,31,.16),transparent 48%,rgba(4,15,31,.16));
 }
 header{
- background:linear-gradient(115deg,#101b35,#1d3158);
- color:white;padding:28px 6%;
+ background:linear-gradient(110deg,rgba(7,20,42,.88),rgba(19,43,73,.70));
+ color:white;
+ padding:28px 6%;
+ border-bottom:1px solid rgba(255,255,255,.13);
+ box-shadow:0 12px 40px rgba(0,0,0,.16);
+ backdrop-filter:blur(18px);
+ -webkit-backdrop-filter:blur(18px);
 }
 .header-inner{
  max-width:1250px;margin:auto;display:flex;align-items:center;gap:16px;
@@ -30,20 +60,20 @@ header{
 }
 header h1{font-size:21px;margin:0;font-weight:750}
 header p{margin:5px 0 0;color:#c4d0e5;font-size:13px}
-main{max-width:1250px;margin:58px auto;padding:0 24px}
-.intro{text-align:center;margin-bottom:36px}
+main{max-width:1250px;margin:58px auto;padding:0 24px;position:relative}
+.intro{text-align:center;margin-bottom:36px;color:#fff}
 .eyebrow{
- color:#536c9a;text-transform:uppercase;letter-spacing:2px;
+ color:#b9d9f5;text-transform:uppercase;letter-spacing:2px;
  font-size:11px;font-weight:800
 }
-.intro h2{font-size:clamp(30px,4vw,43px);margin:12px 0 10px}
-.intro p{color:var(--muted);line-height:1.7;margin:0}
+.intro h2{text-shadow:0 4px 24px rgba(0,0,0,.42);font-size:clamp(30px,4vw,43px);margin:12px 0 10px}
+.intro p{color:#e0eaf7;line-height:1.7;margin:0;text-shadow:0 2px 12px rgba(0,0,0,.55)}
 .projects{
  display:grid;grid-template-columns:repeat(auto-fit,minmax(300px,1fr));
  gap:25px;align-items:stretch
 }
 .card{
- background:white;border:1px solid #e4eaf3;border-radius:23px;
+ background:rgba(248,251,255,.84);border:1px solid rgba(255,255,255,.42);border-radius:23px;
  overflow:hidden;box-shadow:0 12px 35px #1d31580c;
  display:flex;flex-direction:column;transition:transform .2s,box-shadow .2s
 }
@@ -54,6 +84,23 @@ main{max-width:1250px;margin:58px auto;padding:0 24px}
 }
 .art.neurology{background:linear-gradient(135deg,#102d62,#1763a0)}
 .art.breast{background:linear-gradient(135deg,#642b62,#c34d91)}
+
+.art.cardiovascular {
+ background:
+  radial-gradient(ellipse at 68% 42%,rgba(220,38,38,.28),transparent 48%),
+  linear-gradient(125deg,#071629,#102d49 55%,#351b35);
+}
+.art.cardiovascular img {
+ width:92%;height:118%;object-fit:contain;
+ transform:translateY(7px);
+ mix-blend-mode:screen;
+ filter:drop-shadow(0 12px 28px rgba(220,38,38,.24));
+}
+.cardiovascular .tag{background:#e9f5fb;color:#155b78}
+.cardiovascular .button{
+ background:linear-gradient(110deg,#174e70,#a52e43);
+}
+
 .art img{width:100%;height:100%;object-fit:cover;display:block}
 .card-content{padding:25px;display:flex;flex:1;flex-direction:column}
 .tag{
@@ -88,7 +135,7 @@ main{max-width:1250px;margin:58px auto;padding:0 24px}
  text-align:center;color:#8b98ad;font-size:12px;
  padding:35px 20px 28px
 }
-.footer span{display:block;margin-top:6px;color:#aab4c4}
+.footer span{display:block;margin-top:6px;color:#b7c8dc}
 @media(max-width:600px){
  header{padding:22px}
  main{margin:38px auto;padding:0 16px}
